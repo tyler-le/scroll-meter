@@ -6,36 +6,14 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         const scrollDistance = tabScrollDistances[tabId] || 0;
         sendResponse({ scrollDistance: scrollDistance });
     }
-});
 
-chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
-    delete tabScrollDistances[tabId];
-});
-
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.scrollDistance) {
+    else if (message.counter) {
         const tabId = sender.tab.id;
-        const scrollDistance = message.scrollDistance;
-        tabScrollDistances[tabId] =
-            (tabScrollDistances[tabId] || 0) + scrollDistance;
-        console.log(
-            "[Background Script] Scroll distance of tab",
-            tabId,
-            ":",
-            tabScrollDistances[tabId],
-            "pixels"
-        );
+        tabScrollDistances[tabId] = message.counter;
+        console.log("[Background Script] Scroll distance of tab", tabId, ":", tabScrollDistances[tabId], "pixels");
     }
 
-    else if (message.getScrollDistance) {
-        const tabId = sender.tab.id;
-        const scrollDistance = tabScrollDistances[tabId] || 0;
-        sendResponse({ scrollDistance: scrollDistance });
-    }
-});
-
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.getActiveTab) {
+    else if (message.getActiveTab) {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             if (tabs[0]) {
                 const tabId = tabs[0].id;
@@ -44,21 +22,19 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 sendResponse({ tabId: null });
             }
         });
-
         return true; // Need to return true to indicate that we will send a response asynchronously
     }
-});
-
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.getTotalDistances) {
+    else if (message.getTotalDistances || message.updatePopup) {
         let totalDistance = 0;
+        console.log(tabScrollDistances)
         for (let tabId in tabScrollDistances) {
             totalDistance += tabScrollDistances[tabId];
         }
         sendResponse({ totalDistance: totalDistance });
-
         return true; // Need to return true to indicate that we will send a response asynchronously
     }
 });
 
-
+chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
+    delete tabScrollDistances[tabId];
+});

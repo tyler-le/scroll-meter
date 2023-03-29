@@ -3,8 +3,8 @@ let scrollTimeout = null;
 let lastScrollPosition = window.scrollY;
 let counter = 0;
 
-function sendScrollDistance(scrollDistance, tabId) {
-    chrome.runtime.sendMessage({ scrollDistance: scrollDistance, tabId: tabId });
+function sendScrollDistance(counter, tabId) {
+    chrome.runtime.sendMessage({ counter: counter, tabId: tabId });
 }
 
 window.addEventListener('scroll', function () {
@@ -27,11 +27,16 @@ window.addEventListener('scroll', function () {
         chrome.runtime.sendMessage({ getActiveTab: true }, function (response) {
             const tabId = response.tabId;
             if (tabId) {
-                sendScrollDistance(counter, tabId);
 
                 // Log the current scroll distance and tab ID to the console
                 console.log('[Content Script] Scroll distance of tab', tabId, ':', counter, 'pixels');
+                sendScrollDistance(counter, tabId);
+
             }
+        });
+
+        chrome.runtime.sendMessage({ updatePopup: true }, function (response) {
+            chrome.runtime.sendMessage({ setPopup: true, data: response.totalDistance });
         });
 
     }, 1000); // Set the timeout period to 1 second (adjust as desired)
