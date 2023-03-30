@@ -16,13 +16,13 @@ function resetScrollDistance() {
         if (tabId) {
             console.log(`[Content Script] Scroll distance of tab ${tabId}: ${counter} pixels`);
             sendScrollDistance(counter, tabId);
+            chrome.runtime.sendMessage({ updatePopup: true }, function (response) {
+                chrome.runtime.sendMessage({ setPopup: true, data: response.totalDistance });
+            });
         }
     });
-
-    chrome.runtime.sendMessage({ updatePopup: true }, function (response) {
-        chrome.runtime.sendMessage({ setPopup: true, data: response.totalDistance });
-    });
 }
+
 
 function handleScroll() {
     const scrollDelta = Math.abs(window.scrollY - lastScrollPosition);
