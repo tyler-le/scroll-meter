@@ -5,7 +5,7 @@ A Chrome extension that displays the distance scrolled in pixels and feet
 ## Features
 
 - Simple and intuitive UI that displays the distance scrolled in both pixels and feet
-- Flawlessly integrated to work between tabs
+- Chrome Storage API allows the extension to work across different devices and tabs.
 ## Installation
 
 To install this extension, follow these steps:
