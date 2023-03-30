@@ -17,4 +17,6 @@ To install this extension, follow these steps:
 - Select the directory where you cloned or downloaded this repository.
   The ScrollMeter extension should now be installed and ready to use.
 
-<img width="640" alt="scroll_demo" src="https://user-images.githubusercontent.com/15850172/228706032-3e7aeb1d-8198-464c-a9dc-fe99ff9802a5.png">
+
+https://user-images.githubusercontent.com/15850172/228752109-5980968b-b185-47be-bfbd-1cbb1fa71822.mov
+
