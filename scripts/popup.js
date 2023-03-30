@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.setPopup) {
+    if (message.updatePopup) {
         const pxContainer = document.getElementById("px-dist");
         const ftContainer = document.getElementById("ft-dist");
         renderPopup(pxContainer, ftContainer);

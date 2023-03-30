@@ -12,8 +12,8 @@ function sendScrollChange(totalScrollDistance) {
 
 function resetScrollDistance() {
     sendScrollChange(totalScrollDistance);
-    chrome.runtime.sendMessage({ updatePopup: true }, function (response) {
-        chrome.runtime.sendMessage({ setPopup: true });
+    chrome.runtime.sendMessage({ getTotalDistances: true }, function (response) {
+        chrome.runtime.sendMessage({ updatePopup: true });
     });
 }
 
