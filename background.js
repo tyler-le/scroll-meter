@@ -26,7 +26,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     }
     else if (message.getTotalDistances || message.updatePopup) {
         let totalDistance = 0;
-        console.log(tabScrollDistances)
         for (let tabId in tabScrollDistances) {
             totalDistance += tabScrollDistances[tabId];
         }

@@ -1,18 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const output = document.getElementById('output');
+    const pxContainer = document.getElementById("px-dist");
+    const ftContainer = document.getElementById("ft-dist");
 
     chrome.runtime.sendMessage({ getTotalDistances: true }, function (response) {
-        let pixelsToFeet = (response.totalDistance / 1152).toFixed(2);
-        output.innerHTML = `Traveled ${response.totalDistance} px <br> Or ${pixelsToFeet} feet`;
-        console.log('Current scroll distance:', response.totalDistance);
-    });
-
-    // Listen for messages from the content script to update the distance in real time
-    chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-        if (message.setPopup) {
-            let pixelsToFeet = (message.data / 1152).toFixed(2);
-            output.innerHTML = `Traveled ${message.data} px <br> Or ${pixelsToFeet} feet`;
-
-        }
+        renderPopup(pxContainer, ftContainer, response.totalDistance);
     });
 });
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    if (message.counter) {
+        const pxContainer = document.getElementById("px-dist");
+        const ftContainer = document.getElementById("ft-dist");
+        renderPopup(pxContainer, ftContainer, message.counter);
+    }
+});
+
+function renderPopup(pxContainer, ftContainer, pixels) {
+    let pixelsToFeet = (pixels / 1152).toFixed(2);
+    pxContainer.textContent = `${pixels}`
+    ftContainer.textContent = `${pixelsToFeet}`;
+}

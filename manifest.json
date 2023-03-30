@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Scroll Distance Tracker",
-  "version": "1.0",
+  "version": "1.2.1",
   "description": "Tracks the distance that the user has scrolled across all web pages.",
   "action": {
     "default_popup": "popup.html"
