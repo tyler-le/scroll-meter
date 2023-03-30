@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ScrollMeter",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Tracks the distance that the user has scrolled across all web pages.",
   "action": {
     "default_popup": "./pages/popup.html",
@@ -11,6 +11,12 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "host_permissions": ["<all_urls>"],
   "permissions": ["tabs", "storage"],
