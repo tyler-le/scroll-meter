@@ -1,7 +1,9 @@
+
 body {
     background-color: black;
     color: white;
     font-family: "Consolas", monospace;
+    padding: 10px;
 }
 
 
@@ -64,4 +66,10 @@ Stati - minimal statistical cards
 .stati.left div {
     float: left;
     text-align: left;
+}
+
+#donate {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
 }
