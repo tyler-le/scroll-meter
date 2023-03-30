@@ -7,10 +7,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         });
     }
 
-    else if (message.delta) {
-        chrome.storage.sync.get(['distance'], function (result) {
-            chrome.storage.sync.set({ distance: (result.distance || 0) + message.delta });
-        });
+    else if (message.totalScrollDistance) {
+        chrome.storage.sync.set({ distance: message.totalScrollDistance });
     }
 
 

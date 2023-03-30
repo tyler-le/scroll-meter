@@ -1,9 +1,13 @@
 let scrollTimeout = null;
 let lastScrollPosition = window.scrollY;
-let totalScrollDistance = 0;
+let totalScrollDistance;
 
-function sendScrollChange(delta) {
-    chrome.runtime.sendMessage({ delta });
+chrome.runtime.sendMessage({ getTotalDistances: true }, function (response) {
+    totalScrollDistance = response.totalDistance;
+})
+
+function sendScrollChange(totalScrollDistance) {
+    chrome.runtime.sendMessage({ totalScrollDistance });
 }
 
 function resetScrollDistance() {

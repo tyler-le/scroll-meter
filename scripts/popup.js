@@ -17,6 +17,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 function renderPopup(pxContainer, ftContainer) {
     chrome.storage.sync.get(['distance'], function (result) {
         const pixels = result.distance || 0;
+        console.log(`[Popup] ${result.distance}`)
         let pixelsToFeet = (pixels / 1152).toFixed(2);
         pxContainer.textContent = `${pixels}`
         ftContainer.textContent = `${pixelsToFeet}`;
