@@ -29,6 +29,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         for (let tabId in tabScrollDistances) {
             totalDistance += tabScrollDistances[tabId];
         }
+        chrome.storage.sync.set({ distance: totalDistance });
         sendResponse({ totalDistance: totalDistance });
         return true; // Need to return true to indicate that we will send a response asynchronously
     }
