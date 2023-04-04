@@ -19,7 +19,6 @@
     "128": "icons/icon128.png"
   },
   "host_permissions": ["<all_urls>"],
-  "permissions": ["storage"],
 
   "content_scripts": [
     {
