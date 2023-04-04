@@ -20,7 +20,7 @@ function renderPopup(pxContainer, ftContainer) {
         const pixels = result.distance || 0;
         console.log(`[Popup] ${result.distance}`)
         let pixelsToFeet = (pixels / 1152).toFixed(2);
-        pxContainer.textContent = `${pixels}`
+        pxContainer.textContent = `${pixels.toFixed(0)}`
         ftContainer.textContent = `${pixelsToFeet}`;
     });
 
